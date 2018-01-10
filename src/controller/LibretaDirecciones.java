@@ -69,7 +69,23 @@ public class LibretaDirecciones extends Application {
     }
     
     public void muestraVistaPersona(){
+        //Aquí meto todo lo que está en un panel
+        FXMLLoader loader = new FXMLLoader();
+         
+        URL location = LibretaDirecciones.class.getResource("../view/viewPersona.fxml");
+         loader.setLocation(location);
         
+         try {
+             vistaPersona = loader.load();
+         } catch (IOException ex) {
+             Logger.getLogger(LibretaDirecciones.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         
+         layoutPrincipal.setCenter(vistaPersona);
+    }
+    
+    public Stage getPrimaryStage(){
+        return escenarioPrincipal;
     }
     /**
      * @param args the command line arguments
