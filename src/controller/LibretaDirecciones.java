@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -19,15 +21,36 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import model.Persona;
+import view.vistaPersonaController;
 
 /**
  *
  * @author dam
  */
 public class LibretaDirecciones extends Application {
+    //Novedades clase 10/01/2018
+     private ObservableList datosPersona = FXCollections.observableArrayList();
      private Stage escenarioPrincipal;
      private BorderPane layoutPrincipal;
      private AnchorPane vistaPersona;
+     
+     //Vamos a crear un oonstructor
+     public LibretaDirecciones(){
+         
+         datosPersona.add(new Persona("·Jairo", "García Rincón"));
+         datosPersona.add(new Persona("Andrea", "Chenier Lopez"));
+         datosPersona.add(new Persona("Pol", "Jobs"));
+         datosPersona.add(new Persona("Mónica", "de Santos Sánchez"));
+         datosPersona.add(new Persona("Jesús","Ruano Martínez"));
+
+     }
+     
+      //Método para devolver los datos como lista observable de personas
+    public ObservableList getDatosPersona() {
+        return datosPersona;
+    }
+    
     @Override
     public void start(Stage escenarioPrincipal) {
  
@@ -82,6 +105,10 @@ public class LibretaDirecciones extends Application {
          }
          
          layoutPrincipal.setCenter(vistaPersona);
+        
+           //Doy acceso al controlador VistaPersonaCOntroller a LibretaDirecciones
+        vistaPersonaController controller = loader.getController();
+        controller.setLibretaDirecciones(this);
     }
     
     public Stage getPrimaryStage(){
